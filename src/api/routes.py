@@ -16,7 +16,8 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 
 # Allow CORS requests to this API
-CORS(api)
+# CORS(api)
+CORS(api, origins=["https://turbo-couscous-9vq57r7r9wxcp4x7-3000.app.github.dev"])
 
 
 @api.route('/hello', methods=['POST', 'GET'])

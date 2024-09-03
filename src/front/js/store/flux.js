@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			getUsers: async () => {
 				try{
-					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/users")
+					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/users")
 					let data = await response.json()
 					await setStore({dataUsers: data.results})
 					return data.results
@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			register: async (datas) => {
 				try{
-					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/register", {
+					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/register", {
 						method: "POST",
 						body: JSON.stringify(datas),
 						headers: {

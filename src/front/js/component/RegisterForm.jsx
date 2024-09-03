@@ -19,7 +19,7 @@ export const RegisterForm = () => {
     }
 
     const sendData = async (e) => {
-        e.preventDefaulft()
+        e.preventDefault()
         try{
             await actions.register(data)
             setData({
