@@ -28,6 +28,22 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@api.route("/users", methods=["GET"])
+def get_users():
+    try:
+        query_results = User.query.all()
+        results = list(map(lambda user: user.serialize(), query_results))
+
+        response_body = { 
+            "msg" : "Estas trayendo la lista de usuarios",
+            "results" : results
+        }
+
+        return jsonify(response_body), 200
+    except Exception as e:
+        return jsonify({"error": "Internal error" + str(e)}), 500
+
+
 @api.route("/register", methods=["POST"])
 def register():
     try:
