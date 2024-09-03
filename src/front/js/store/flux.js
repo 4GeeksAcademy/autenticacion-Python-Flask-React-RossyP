@@ -17,6 +17,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			register: async (datas) => {
+				try{
+					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/")
+				}catch (e){
+					console.error(e)
+				}
+			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
