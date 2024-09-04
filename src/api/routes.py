@@ -7,7 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 # from main import bcrypt
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, create_access_token
 
 
 api = Blueprint('api', __name__)
@@ -64,7 +64,7 @@ def register():
             return jsonify({"msg": f"El email {email}, que intentas registrar ya existe."}), 400
         
         password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
-
+        print(password_hash)
         new_user = User(name=name, email=email, password=password_hash)
 
         db.session.add(new_user)
@@ -74,3 +74,30 @@ def register():
     
     except Exception as e:
         return jsonify({"error": "Internal error: " + str(e)}), 500
+    
+@api.route("/login", methods=["POST"])
+def get_token():
+    try:
+        email = request.json.get("email")
+        password = request.json.get("password")
+
+        if not email or not password:
+            return jsonify({"msg":"Se requiere el email y el password"}), 400
+
+        login_user = User.query.filter_by(email=email).one()
+
+        if not login_user:
+            return jsonify({"msg": "El email ingresado no existe, registrate"}), 404
+        
+        password_from_db = login_user.password
+        true_or_false = bcrypt.check_password_hash(password_from_db, password)
+
+        if true_or_false:
+            login_user_id = login_user.id
+            access_token = create_access_token(identity=login_user_id)
+            return jsonify({"access_token":access_token, "name":login_user.name, "email":login_user.email}), 200
+        else:
+            return jsonify({"msg": "Contraseña incorrecta"}), 404
+    
+    except Exception as e:
+        return jsonify({"error": "internal error "+ str(e)}), 500

@@ -52,6 +52,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			login: async (infoLogin) => {
+				try{
+					const response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/login",{
+						method: "POST",
+						body: JSON.stringify(infoLogin),
+						headers: {
+							"Content-Type" : "application/json" 
+						}
+					})
+					let data = await response.json()
+					console.log(data)
+					if(data.access_token){
+						alert("BIENVENIDO "+ data.name)
+						localStorage.setItem("token", data.access_token)
+						localStorage.setItem("name", data.name)
+						localStorage.setItem("email", data.email)
+					}else{
+						alert("Algo salio mal, no pudiste loguearte :(")
+					}
+						
+				}catch (e){
+					console.error(e)
+				}
+			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},

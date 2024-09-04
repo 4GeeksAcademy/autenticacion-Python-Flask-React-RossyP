@@ -35,6 +35,7 @@ export const RegisterForm = () => {
     console.log(data)
     return(
         <div className="d-flex justify-content-center align-items-center min-vh-100">
+            <h1>Register</h1>
             <form onSubmit={sendData}>
                 {/* NAME */}
                 <div className="mb-3">
