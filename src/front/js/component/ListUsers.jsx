@@ -15,7 +15,7 @@ export const ListUsers = () => {
     },[])
     return(
         <div className="d-flex justify-content-center align-items-center min-vh-100">
-            <div className="d-flex flex-wrap">
+            <div className="d-flex flex-wrap bg-primary">
             {store.dataUsers && store.dataUsers.length > 0 ?
                 (store.dataUsers.map((user )=> (
                     <div key={user.id}>

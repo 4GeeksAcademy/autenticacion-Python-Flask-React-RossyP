@@ -1,0 +1,4 @@
+.fondoRegister {
+    background: rgb(75,135,78);
+    background: radial-gradient(circle, rgba(75,135,78,1) 4%, rgba(0,0,0,1) 88%, rgba(20,29,21,1) 100%, rgba(48,82,53,1) 100%);
+}

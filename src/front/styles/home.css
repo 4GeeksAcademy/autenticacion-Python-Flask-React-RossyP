@@ -8,6 +8,6 @@
 */
 
 .fondoLogin {
-    background: rgb(233,201,223);
-    background: radial-gradient(circle, rgba(233,201,223,1) 0%, rgba(140,107,122,1) 37%, rgba(0,18,32,1) 83%, rgba(0,18,32,1) 100%);
+    background: rgb(49,60,144);
+    background: linear-gradient(162deg, rgba(49,60,144,1) 0%, rgba(16,61,103,1) 37%, rgba(0,18,32,1) 83%, rgba(0,18,32,1) 100%);
 }
