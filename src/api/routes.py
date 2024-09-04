@@ -7,7 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 # from main import bcrypt
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
 api = Blueprint('api', __name__)
@@ -30,17 +30,23 @@ def handle_hello():
     return jsonify(response_body), 200
 
 @api.route("/users", methods=["GET"])
+@jwt_required()
 def get_users():
     try:
-        query_results = User.query.all()
-        results = list(map(lambda user: user.serialize(), query_results))
+        current_user_id = get_jwt_identity()
+        if current_user_id:
+            query_results = User.query.all()
+            results = list(map(lambda user: user.serialize(), query_results))
 
-        response_body = { 
-            "msg" : "Estas trayendo la lista de usuarios",
-            "results" : results
-        }
+            response_body = { 
+                "msg" : "Estas trayendo la lista de usuarios",
+                "results" : results
+            }
 
-        return jsonify(response_body), 200
+            return jsonify(response_body), 200
+        else:
+            return jsonify({"msg": "Token invalido"}), 401
+    
     except Exception as e:
         return jsonify({"error": "Internal error" + str(e)}), 500
 

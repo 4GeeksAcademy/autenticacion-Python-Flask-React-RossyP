@@ -1,9 +1,11 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
     const {store, actions} = useContext(Context)
+    const navigate = useNavigate()
     const [ dataLog, setDataLog ] = useState({
         email: "",
         password:""
@@ -24,6 +26,7 @@ export const LoginForm = () => {
                 email: "",
                 password:""
             })
+            navigate("/list-users")
         }catch (e){
             console.error(e)
         }

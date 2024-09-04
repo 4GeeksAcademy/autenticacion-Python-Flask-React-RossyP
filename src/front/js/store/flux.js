@@ -21,8 +21,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			getUsers: async () => {
+				let get_token = localStorage.getItem("token")
+				if (!get_token){
+					return alert("Logueate para poder ver la lista")
+				}
 				try{
-					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/users")
+					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/users",{
+						headers: {
+							"Authorization": `Bearer ${get_token}`
+						}
+					})
 					let data = await response.json()
 					await setStore({dataUsers: data.results})
 					return data.results

@@ -1,9 +1,11 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterForm = () => {
     const { store, actions } = useContext(Context)
+    const navigate = useNavigate()
     const [ data, setData ] = useState({
         name:"",
         email:"",
@@ -27,6 +29,7 @@ export const RegisterForm = () => {
                 email: "",
                 password: ""
             })
+            navigate("/")
         }catch (error){
             console.error(error)
         }
