@@ -34,7 +34,7 @@ export const ListUsers = () => {
                     // </div>
                     <div class="row g-0 mb-4 bg-transparent border-none" style={{backdropFilter:"blur(10px)", border:"none", borderRadius:"10px"}}>
                         <div className="col-md-4 text-center" style={{backgroundColor:"pink"}}>
-                            <img src={userImage} className="img-fluid rounded-start w-75"/>
+                            <img src={userImage} className="img-fluid rounded-start w-50"/>
                         </div>
                         <div className="col-md-8" style={{backgroundColor:"white"}}>
                             <div className="card-body">
