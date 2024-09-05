@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await response.json()
 
 					if(response.ok){
-						alert("Registro existoso!")
+						console.log("Registro existoso!")
 					}else{
 						alert("Algo salio mal")
 					}
@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await response.json()
 					console.log(data)
 					if(data.access_token){
-						alert("BIENVENIDO "+ data.name)
+						console.log("BIENVENIDO "+ data.name)
 						localStorage.setItem("token", data.access_token)
 						localStorage.setItem("name", data.name)
 						localStorage.setItem("email", data.email)
@@ -84,6 +84,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(e)
 				}
 			},
+
+			deleteUser: async (id) => {
+				try{
+					const store = getStore()
+					const response = await fetch(`https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/user/${id}`,{
+						method: "DELETE"
+					})
+					let data = await response.json()
+					console.log(data)
+					if(response.ok){
+						let listaFiltradaUsers = store.dataUsers.filter((item)=>item.id !== id)
+						setStore({dataUsers: listaFiltradaUsers})
+					}
+					return response.json()
+
+				}catch (e){
+					console.error(e)
+				}
+				
+			},
+
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

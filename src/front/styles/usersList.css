@@ -2,3 +2,7 @@
     background: rgb(223,170,198);
     background: linear-gradient(270deg, rgba(223,170,198,1) 0%, rgba(37,60,98,1) 97%);
 }
+
+.modal-backdrop {
+    z-index: 1050 !important; 
+  }

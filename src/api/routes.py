@@ -107,3 +107,18 @@ def get_token():
     
     except Exception as e:
         return jsonify({"error": "internal error "+ str(e)}), 500
+
+@api.route("/user/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    try:
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"msg": "El usuario no existe"}), 404
+        
+        db.session.delete(user)
+        db.session.commit()
+
+        return jsonify({"msg": "Usuario eliminado con exito"}), 200
+    
+    except Exception as e:
+        return jsonify({"error":"Internal error "+ str(e)}), 500

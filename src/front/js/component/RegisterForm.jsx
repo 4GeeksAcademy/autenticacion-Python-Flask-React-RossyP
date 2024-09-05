@@ -11,6 +11,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 export const RegisterForm = () => {
     const { store, actions } = useContext(Context)
     const navigate = useNavigate()
+    const [alertMessage, setAlertmessage] = useState("")
     const [ data, setData ] = useState({
         name:"",
         email:"",
@@ -34,7 +35,11 @@ export const RegisterForm = () => {
                 email: "",
                 password: ""
             })
-            navigate("/")
+            setAlertmessage("¡Registrado con exito!")
+            setTimeout(()=>{
+                navigate("/")
+            }, 2000)
+            
         }catch (error){
             console.error(error)
         }
@@ -47,7 +52,10 @@ export const RegisterForm = () => {
     console.log(data)
 
     return(
-        <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
+            <div className="w-25 p-2">
+                {alertMessage && <div className="alert alert-success w-100" role="alert" style={{zIndex:1000}}>{alertMessage}</div>}
+            </div>
             <div className="p-3 w-25 d-flex flex-column gap-3" style={{backdropFilter:"blur(50px)", minWidth:"350px"}}>
                 <form onSubmit={sendData} className="bg-white p-3 d-flex flex-column">
                     {/* NAME */}

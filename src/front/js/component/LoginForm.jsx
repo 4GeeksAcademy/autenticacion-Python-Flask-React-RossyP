@@ -11,6 +11,7 @@ import { faKey } from '@fortawesome/free-solid-svg-icons';
 export const LoginForm = () => {
     const {store, actions} = useContext(Context)
     const navigate = useNavigate()
+    const [alertMessage, setAlertMessage] = useState("")
     const [ dataLog, setDataLog ] = useState({
         email: "",
         password:""
@@ -31,7 +32,10 @@ export const LoginForm = () => {
                 email: "",
                 password:""
             })
-            navigate("/list-users")
+            setAlertMessage("Iniciando sesión...")
+            setTimeout(() => {
+                navigate("/list-users");
+            }, 2000);
         }catch (e){
             console.error(e)
         }
@@ -42,7 +46,10 @@ export const LoginForm = () => {
     }
 
     return(
-        <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
+            <div className="w-25 p-2">
+                {alertMessage && <div className="alert alert-primary w-100" role="alert" style={{zIndex:1000}}>{alertMessage}</div>}
+            </div>
             <div className="p-3 w-25 d-flex flex-column gap-3" style={{backdropFilter:"blur(50px)", minWidth:"350px"}}>
                 <form onSubmit={sendDataLog} className="bg-white p-3 d-flex flex-column">
                     

@@ -17,7 +17,7 @@ export const Navbar = () => {
 	}
 
 	return (
-		<nav className="navbar navbar-light position-fixed w-100 bg-transparent" style={{ zIndex: 1050, backdropFilter:"blur(200px)" }}>
+		<nav className="navbar navbar-light w-100 bg-transparent" style={{ zIndex: 100, backdropFilter:"blur(200px)" }}>
 			<div className="container">
 				<div className="navbar-brand mb-0 fs-1 text-transparent"><FontAwesomeIcon icon={faSun} /></div>
 				<div className="ml-auto">
