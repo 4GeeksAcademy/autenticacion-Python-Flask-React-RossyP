@@ -4,12 +4,15 @@ import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import userImage from "../../img/User1.png"
+import { Loader } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css';
+
 
 
 export const ListUsers = () => {
 
     const { store, actions } = useContext(Context)
-    const nameUser = localStorage.getItem("name")
+    // const nameUser = localStorage.getItem("name")
 
     useEffect(()=>{
         let token = localStorage.getItem("token")
@@ -28,7 +31,7 @@ export const ListUsers = () => {
         <div className="d-flex flex-column justify-content-center align-items-center min-vh-100 w-100">
             {/* <div className="d-flex flex-wrap justify-content-center align-items-center bg-primary p-3 gap-3"> */}
 
-            <div className="card mb-3 p-5 bg-transparent border-none" style={{maxWidth:"740px", border:"none", backdropFilter:"blur(100px)", marginTop:"50px"}}>
+            <div className="card mb-3 p-5 bg-transparent border-none" style={{maxWidth:"740px", border:"none", marginTop:"10px"}}>
             {store.dataUsers && store.dataUsers.length > 0 ?
                 (store.dataUsers.map((user )=> (
                     <div>
@@ -69,8 +72,8 @@ export const ListUsers = () => {
                     
                     ))
                 ):(
-                <div>
-                    <h1>No hay datos que mostrar</h1>
+                <div className="d-flex justify-content-center align-items-center">
+                    <Loader size="lg" />
                 </div>
                 )
             }

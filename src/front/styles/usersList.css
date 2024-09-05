@@ -6,3 +6,11 @@
 .modal-backdrop {
     z-index: 1050 !important; 
   }
+
+.navbar{
+
+    mask-image: linear-gradient(
+        black 80%,
+        transparent
+    );
+}

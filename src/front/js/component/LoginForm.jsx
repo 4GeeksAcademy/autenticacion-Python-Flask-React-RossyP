@@ -84,7 +84,7 @@ export const LoginForm = () => {
                             <FontAwesomeIcon icon={faKey} />
                         </span>
                         <div className="form-floating" style={{width:"85%"}}>
-                            <input value={dataLog.password} name="password" type="text" className="form-control" id="floatingInputPassword" placeholder="password" onChange={handleDataLog}/>
+                            <input value={dataLog.password} name="password" type="password" className="form-control" id="floatingInputPassword" placeholder="password" onChange={handleDataLog}/>
                             <label htmlFor="floatingInputPassword">Password</label>
                         </div>
                     </div>
