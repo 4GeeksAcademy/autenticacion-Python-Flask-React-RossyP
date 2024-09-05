@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return alert("Logueate para poder ver la lista")
 				}
 				try{
-					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/users",{
+					let response = await fetch(`${process.env.BACKEND_URL}/api/users`,{
 						headers: {
 							"Authorization": `Bearer ${get_token}`
 						}
@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			register: async (datas) => {
 				try{
-					let response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/register", {
+					let response = await fetch(`${process.env.BACKEND_URL}/api/register`, {
 						method: "POST",
 						body: JSON.stringify(datas),
 						headers: {
@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			login: async (infoLogin) => {
 				try {
-					const response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/login", {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
 						method: "POST",
 						body: JSON.stringify(infoLogin),
 						headers: {
@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteUser: async (id) => {
 				try{
 					const store = getStore()
-					const response = await fetch(`https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/user/${id}`,{
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${id}`,{
 						method: "DELETE"
 					})
 					let data = await response.json()
