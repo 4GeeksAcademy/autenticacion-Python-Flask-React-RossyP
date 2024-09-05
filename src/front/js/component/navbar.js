@@ -1,15 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons';
 
 
 
+
 export const Navbar = () => {
 
+	const navigate = useNavigate()
 	const logout = () => {
 		//localStorage.removeItem("token")
+		localStorage.clear();
 		console.log("Sesión cerrada")
+		navigate("/")
 	}
 
 	return (

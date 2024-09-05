@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 export const RegisterForm = () => {
@@ -57,7 +58,7 @@ export const RegisterForm = () => {
 
                     <div className="input-group mb-3">
                         <span className="input-group-text">
-                            <FontAwesomeIcon icon={faEnvelope} />
+                            <FontAwesomeIcon icon={faUser} />
                         </span>
                         <div className="form-floating"  style={{width:"85%"}}>
                             <input value={data.name} name="name" type="text" className="form-control" id="floatingInputName" placeholder="name" onChange={handleData}/>
