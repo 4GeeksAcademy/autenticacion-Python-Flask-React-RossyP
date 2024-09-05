@@ -61,29 +61,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (infoLogin) => {
-				try{
-					const response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/login",{
+				try {
+					const response = await fetch("https://turbo-couscous-9vq57r7r9wxcp4x7-3001.app.github.dev/api/login", {
 						method: "POST",
 						body: JSON.stringify(infoLogin),
 						headers: {
-							"Content-Type" : "application/json" 
+							"Content-Type": "application/json"
 						}
-					})
-					let data = await response.json()
-					console.log(data)
-					if(data.access_token){
-						console.log("BIENVENIDO "+ data.name)
-						localStorage.setItem("token", data.access_token)
-						localStorage.setItem("name", data.name)
-						localStorage.setItem("email", data.email)
-					}else{
-						alert("Algo salio mal, no pudiste loguearte :(")
+					});
+
+					console.log(response)
+					
+					if (!response.ok) {
+						const errorData = await response.json();
+						return { success: false, message: errorData.message || "Login fallido" };
 					}
+			
+					let data = await response.json();
+					console.log(data);
+			
+					if (data.access_token) {
+						console.log("BIENVENIDO " + data.name);
+						localStorage.setItem("token", data.access_token);
+						localStorage.setItem("name", data.name);
+						localStorage.setItem("email", data.email);
 						
-				}catch (e){
-					console.error(e)
+						return { success: true };
+					} else {
+						return { success: false, message: "No se pudo iniciar sesión" };
+					}
+			
+				} catch (e) {
+					console.error(e);
+					return { success: false, message: "Error en la solicitud" };
 				}
 			},
+			
 
 			deleteUser: async (id) => {
 				try{

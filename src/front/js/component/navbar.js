@@ -16,8 +16,10 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
+	const nameUser = localStorage.getItem("name")
+
 	return (
-		<nav className="navbar navbar-light w-100 bg-transparent" style={{ zIndex: 100, backdropFilter:"blur(200px)" }}>
+		<nav className="navbar navbar-light w-100 bg-black" style={{ zIndex: 100, backdropFilter:"blur(200px)"}}>
 			<div className="container">
 				<div className="navbar-brand mb-0 fs-1 text-transparent"><FontAwesomeIcon icon={faSun} /></div>
 				<div className="ml-auto">
@@ -26,6 +28,9 @@ export const Navbar = () => {
 					</Link>
 				</div>
 			</div>
+			<div className="text-white w-100 d-flex justify-content-center align-items-center pt-5">
+                <h1>Bienvenid@ {nameUser}</h1>
+            </div>
 		</nav>
 	);
 };

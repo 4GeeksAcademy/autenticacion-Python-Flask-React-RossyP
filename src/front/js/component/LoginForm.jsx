@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +16,7 @@ export const LoginForm = () => {
         email: "",
         password:""
     })
+    
 
     const handleDataLog = (e) =>{
         let valor = e.target.value
@@ -27,15 +28,27 @@ export const LoginForm = () => {
         e.preventDefault()
         try{
             console.log("data enviada", dataLog)
-            await actions.login(dataLog)
-            setDataLog({
-                email: "",
-                password:""
-            })
-            setAlertMessage("Iniciando sesión...")
-            setTimeout(() => {
-                navigate("/list-users");
-            }, 2000);
+            const response = await actions.login(dataLog)
+            if (response && response.success){
+                setDataLog({
+                    email: "",
+                    password:""
+                })
+                setAlertMessage("Iniciando sesión...")
+                setTimeout(() => {
+                    navigate("/list-users");
+                }, 2000);
+            }else{
+                console.error("ERROR")
+                setAlertMessage("Email o contraseña incorrecta")
+                setTimeout(()=>{
+                    setAlertMessage("")
+                }, 2000)
+                setDataLog({
+                    email: "",
+                    password:""
+                })
+            }
         }catch (e){
             console.error(e)
         }
@@ -47,9 +60,10 @@ export const LoginForm = () => {
 
     return(
         <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-            <div className="w-25 p-2">
+            <div className="w-25 p-2 b-primary" style={{minWidth:"340px"}}>
                 {alertMessage && <div className="alert alert-primary w-100" role="alert" style={{zIndex:1000}}>{alertMessage}</div>}
             </div>
+                 
             <div className="p-3 w-25 d-flex flex-column gap-3" style={{backdropFilter:"blur(50px)", minWidth:"350px"}}>
                 <form onSubmit={sendDataLog} className="bg-white p-3 d-flex flex-column">
                     
@@ -84,6 +98,8 @@ export const LoginForm = () => {
                     {/* <Link to="/register">Sign up</Link> */}
                     <button onClick={handleButtonCreate} type="button" class="btn btn-outline-success">Create Account</button>
                 </div>
+
+
             </div>
         </div>
     )

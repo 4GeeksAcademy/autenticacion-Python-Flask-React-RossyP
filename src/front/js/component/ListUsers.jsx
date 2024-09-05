@@ -9,6 +9,7 @@ import userImage from "../../img/User1.png"
 export const ListUsers = () => {
 
     const { store, actions } = useContext(Context)
+    const nameUser = localStorage.getItem("name")
 
     useEffect(()=>{
         let token = localStorage.getItem("token")
@@ -24,8 +25,9 @@ export const ListUsers = () => {
     }
 
     return(
-        <div className="d-flex justify-content-center align-items-center min-vh-100 w-100">
+        <div className="d-flex flex-column justify-content-center align-items-center min-vh-100 w-100">
             {/* <div className="d-flex flex-wrap justify-content-center align-items-center bg-primary p-3 gap-3"> */}
+
             <div className="card mb-3 p-5 bg-transparent border-none" style={{maxWidth:"740px", border:"none", backdropFilter:"blur(100px)", marginTop:"50px"}}>
             {store.dataUsers && store.dataUsers.length > 0 ?
                 (store.dataUsers.map((user )=> (
